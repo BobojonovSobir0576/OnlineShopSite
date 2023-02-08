@@ -5,6 +5,9 @@ from catalog.views.country_manufacter_views import *
 from catalog.views.brands_views import *
 from catalog.views.guide_characteristic_views import *
 from catalog.views.guide_units_measurement_views import *
+from catalog.views.models_views import *
+from catalog.views.SetCharesteristicProductViews import *
+from catalog.views.ProductViews import *
 
 
 urlpatterns = [
@@ -50,4 +53,24 @@ urlpatterns = [
     path('guideUnitsMeasurement_detail/',GuideUnitsMeasurementDetailViews.as_view(),name='guideUnitsMeasurement_detail'),
     path('guideUnitsMeasurement_update/',GuideUnitsMeasurementUpdateViews.as_view(),name='guideUnitsMeasurement_update'),
 
+    # models
+    path('create_models/',create_models,name='create_models'),
+    path('update_models/<int:pk>/',update_models,name='update_models'),
+    path('list_models/',list_models,name="list_models"),
+    path('detail_models/<int:pk>/',detail_models,name='detail_models'),
+    path('delete_models/<int:pk>/',delete_models,name='delete_models'),
+    
+    # models
+    path('create_SetCharesteristicProduct/',create_SetCharesteristicProduct,name='create_SetCharesteristicProduct'),
+    path('update_SetCharesteristicProduct/<int:pk>/',update_SetCharesteristicProduct,name='update_SetCharesteristicProduct'),
+    path('list_SetCharesteristicProduct/',list_SetCharesteristicProduct,name="list_SetCharesteristicProduct"),
+    path('detail_SetCharesteristicProduct/<int:pk>/',detail_SetCharesteristicProduct,name='detail_SetCharesteristicProduct'),
+    path('delete_SetCharesteristicProduct/<int:pk>/',delete_SetCharesteristicProduct,name='delete_SetCharesteristicProduct'),
+
+        # models
+    path('create_product/',create_product,name='create_product'),
+    path('update_product/<int:pk>/',update_product,name='update_product'),
+    path('list_product/',list_product,name="list_product"),
+    path('detail_product/<int:pk>/',detail_product,name='detail_product'),
+    path('delete_product/<int:pk>/',delete_product,name='delete_product'),
 ]   

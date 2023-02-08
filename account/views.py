@@ -50,16 +50,11 @@ def signInView(request):
             context['error'] = "Информация не заполнена"
             return render(request,'login.html',context)
         user = authenticate(request,username=username,password=password)
+        # Когда пользователь входит в систему, на странице входа проверяются их роли и отправляются на их страницы.
         if user is not None:
             login(request,user)
             if len(user.groups.all().filter(name='JUSTUSER'))!=0: 
                 return redirect('justUser')
-            # elif  len(user.groups.all().filter(name='ORDERMANAGER'))!=0: 
-            #     return redirect('orderManager')
-            # elif  len(user.groups.all().filter(name='PRODUCTMANAGER'))!=0: 
-            #     return redirect('productManager')
-            # elif  len(user.groups.all().filter(name='OWNER'))!=0: 
-            #     return redirect('owner')
             else:
                 context['error'] = "Доступ к этой системе запрещен"
                 return render(request,'login.html',context)
