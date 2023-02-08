@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django import forms
 from django.contrib.auth import forms as auth_forms
 from account.choices import GENDER
+from account.models import *
 
 user_model = get_user_model()
 
@@ -11,7 +12,16 @@ class CustomUserCreationForm(UserCreationForm):
     # todo check if I need this form
     class Meta:
         model = user_model
-        fields = ('email','password',)
+        fields = ('first_name', 'last_name','email', 'gender', 'phone_number','username', 'password1', 'password2' , 'photo')
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.is_active = False
+        user.set_password(self.cleaned_data.get('password'))
+        user.username = self.cleaned_data.get('username')
+        if commit:
+            user.save()
+        return user
 
 
 class CustomUserChangeForm(UserChangeForm):
@@ -21,12 +31,8 @@ class CustomUserChangeForm(UserChangeForm):
         fields = ('email','password')
 
 
-class LoginForm(auth_forms.AuthenticationForm):
-    username = forms.CharField(required=True)
-    password = forms.CharField(widget=forms.PasswordInput)
-    class Meta:
-        model = user_model
-        fields = ('password',)
+class LoginForms(auth_forms.AuthenticationForm):
+    pass
     
 
 
@@ -34,15 +40,8 @@ class UserEditForm(auth_forms.UserChangeForm):
     password = None
     class Meta:
         model = user_model
-        fields = ('username', 'email', 'last_name', 'first_name', 'middle_name',
+        fields = ('username', 'email', 'last_name', 'first_name',
             'phone_number', 'gender', 'photo')
-
-class RegisterForm(UserCreationForm):
-    gender = forms.ChoiceField(choices=GENDER)
-    
-    class Meta:
-        model = user_model
-        fields = ('first_name', 'last_name','middle_name','email', 'gender', 'phone_number','username', 'password1', 'password2' , 'photo')
 
 class CustomPasswordChangeForm(auth_forms.PasswordChangeForm):
     def __init__(self, instance, *args, **kwargs):
