@@ -113,3 +113,4 @@ LOGIN_REDIRECT_URL = 'sign_in'
 LOGIN_URL='sign_in'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+CART_SESSION_ID = 'cart'

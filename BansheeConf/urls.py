@@ -8,7 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('acoount/',include('account.urls')),
     path('catalog/',include('catalog.urls')),
-    # path('orders/',include('orders.urls')),
+    path('orders/',include('orders.urls')),
     # path('profiles/',include('profiles.urls')),
 ]
 

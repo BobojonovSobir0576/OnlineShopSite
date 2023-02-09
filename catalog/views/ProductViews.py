@@ -13,7 +13,6 @@ def create_product(request):
     context['SCP'] = SetCharesteristicProduct.objects.all()
     context['country_manu'] = CountryManufacter.objects.all()
     
-    
     if request.method == 'POST':
         model = Models.objects.get(id = request.POST['model'])
         seasson = Seasson.objects.get(id = request.POST['seasson'])
@@ -24,7 +23,7 @@ def create_product(request):
         price = request.POST['price']
         description = request.POST['description']
         image = request.FILES['name']
-        models_create = Product.objects.create(name = name, price=price,description = description, model=model,seasson = seasson,car_types = car_types, SCP=SCP,country_manu = country_manu, image=image)
+        models_create = Product.objects.create(name = name,price=price,description = description, model=model,seasson = seasson,car_types = car_types, SCP=SCP,country_manu = country_manu, image=image)
     return render(request,'product/create.html',context)
 
 def update_product(request,pk):

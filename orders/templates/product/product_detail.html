@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Detail Product</h1>
+    <img src="{{ product_detail.image.url }" width="15px" height="15px" alt="No image">
+    <h2>{{ product_detail.name  }}</h2>
+    <h2>{{ product_detail.price }}</h2>
+    <form action="{% url 'cart_add' product_detail.id %}" method="post">
+        {% csrf_token %}
+        {{ cart_product_form }}
+        <input type="submit" value="Addto to Cart "> 
+    </form>
+</body>
+</html>

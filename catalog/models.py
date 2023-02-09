@@ -71,9 +71,9 @@ class SetCharesteristicProduct(models.Model):
         return self.value
 
 class Product(models.Model):
-    name = models.CharField(max_length=64, blank=True, null=True, default=None, validators=[validate])
+    name = models.CharField(max_length=64, blank=True, null=True, default=None)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    description = models.TextField(blank=True, null=True, default=None, validators=[validate])
+    description = models.TextField(blank=True, null=True, default=None)
     is_active = models.BooleanField(default=True)
     model = models.ForeignKey(Models, on_delete=models.PROTECT, 
                                 related_name='modelproduct', verbose_name='Модель')

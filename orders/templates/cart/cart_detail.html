@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Detail</title>
+</head>
+<body>
+    <h1>Shopping Cart</h1>
+    <table class="cart">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Remove</th>
+                <th>Unit Price</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart %}
+            {% with item.product as product  %}
+            <tr>
+                <th>
+                    <a href="{{ product.get_absolute_url }}">
+                        <img src="{{ product.image.url }}" width="15px" height="15px" alt="">
+                    </a>
+                </th>
+                <th>{{ product.name }}</th>
+                <th>{{ item.quantity }}</th>
+                <th>
+                    <a href="{% url 'cart_remove' product.id %}  ">Remove</a>
+                </th>
+                <th>Rs {{ item.price }}</th>
+                <th>Rs {{ item.total_price }}</th>
+            </tr>
+            {% endwith %}
+            {% endfor %}
+
+            <tr>
+                <td>Total</td>
+                <td colspan="4"></td>
+                <td class="num">Rs {{ cart.get_total_price }}</td>
+            </tr>
+        </tbody>
+
+    </table>
+
+    <p>
+        <a href="{% url 'product_list' %}">Products</a>
+        <a href="#">CheckOut</a >
+    </p>
+</body>
+</html>
